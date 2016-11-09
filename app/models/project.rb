@@ -7,6 +7,8 @@ class Project < ApplicationRecord
 
   has_and_belongs_to_many :uploads
 
+  mount_uploader :logo
+
   def upload_count
     uploads.count
   end

@@ -1,6 +1,12 @@
 # encoding: utf-8
 class Upload < ApplicationRecord
-  has_many :comments
   belongs_to :user
   has_and_belongs_to_many :projects
+  has_many :comments, class_name: 'Upload::Comment'
+
+  mount_uploader :image
+
+  validates_presence_of :image
+  validates_length_of :projects, minimum: 1
+  validates_presence_of :user
 end

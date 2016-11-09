@@ -5,6 +5,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem 'carrierwave'
 gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
