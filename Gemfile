@@ -5,6 +5,9 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem 'omniauth'
+gem 'devise'
+gem 'devise_token_auth'
 
 group :development, :test do
   gem 'byebug', platform: :mri

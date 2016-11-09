@@ -9,9 +9,19 @@ RSpec.describe Project, type: :model do
   it { should have_and_belong_to_many :uploads }
 
   describe '#upload_count' do
-    it 'should have the actual upload count' do
-      project = create(:project)
-      expect(project.upload_count).to equal(project.uploads.count)
+    before(:each) do
+      @project = create(:project)
+    end
+
+    it 'has the actual upload count' do
+      expect(@project.upload_count).to eql(@project.uploads.count)
+    end
+
+    it 'updates accordingly' do
+      expect(@project.upload_count).to eql(@project.uploads.count)
+
+      @project.uploads << create(:upload)
+      expect(@project.upload_count).to eql(@project.uploads.count)
     end
   end
 end
