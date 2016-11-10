@@ -10,11 +10,15 @@ gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'byebug', platform: :mri
 
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'faker'
 end

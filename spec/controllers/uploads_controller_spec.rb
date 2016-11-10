@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe UploadsController, type: :controller do
-  let(:valid_attributes) { attributes_for(:upload) }
-  let(:invalid_attributes) { attributes_for(:upload, image: nil) }
+  let(:user) { create(:user) }
+  let(:projects) { create_list(:project, 3) }
+  let(:attributes) { attributes_for(:upload) }
+  let(:valid_attributes) { attributes.merge(project_ids: projects.pluck(:id)) }
+  let(:invalid_attributes) { attributes.merge(image: nil) }
 
   describe 'GET #index' do
     it 'assigns all uploads as @uploads' do
@@ -20,22 +23,9 @@ RSpec.describe UploadsController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
-    it 'assigns a new upload as @upload' do
-      get :new, params: {}
-      expect(assigns(:upload)).to be_a_new(Upload)
-    end
-  end
-
-  describe 'GET #edit' do
-    it 'assigns the requested upload as @upload' do
-      upload = create(:upload)
-      get :edit, params: { id: upload.to_param }
-      expect(assigns(:upload)).to eq(upload)
-    end
-  end
-
   describe 'POST #create' do
+    before(:each) { auth_request(user) }
+
     context 'with valid params' do
       it 'creates a new Upload' do
         expect {
@@ -45,6 +35,7 @@ RSpec.describe UploadsController, type: :controller do
 
       it 'assigns a newly created upload as @upload' do
         post :create, params: { upload: valid_attributes }
+
         expect(assigns(:upload)).to be_a(Upload)
         expect(assigns(:upload)).to be_persisted
       end
@@ -54,6 +45,7 @@ RSpec.describe UploadsController, type: :controller do
       it 'assigns a newly created but unsaved upload as @upload' do
         post :create, params: { upload: invalid_attributes }
         expect(assigns(:upload)).to be_a_new(Upload)
+        expect(assigns(:upload)).to be_invalid
       end
     end
   end
@@ -85,6 +77,8 @@ RSpec.describe UploadsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    before(:each) { auth_request(user) }
+
     it 'destroys the requested upload' do
       upload = create(:upload)
       expect {

@@ -20,7 +20,7 @@ RSpec.describe Project, type: :model do
     it 'updates accordingly' do
       expect(@project.upload_count).to eql(@project.uploads.count)
 
-      @project.uploads << create(:upload)
+      @project.uploads << build(:upload)
       expect(@project.upload_count).to eql(@project.uploads.count)
     end
   end

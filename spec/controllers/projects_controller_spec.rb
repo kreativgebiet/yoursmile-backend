@@ -16,24 +16,9 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe 'GET #show' do
     it 'returns 200' do
-      get :show
+      project = create(:project)
+      get :show, params: { id: project.id }
       expect(response).to have_http_status(200)
-    end
-  end
-
-  describe 'POST #new' do
-    context 'on success' do
-      it 'returns created' do
-        post :new
-        expect(response).to have_http_status(:created)
-      end
-    end
-
-    context 'on failure' do
-      it 'returns unprocessable entity' do
-        post :new
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
     end
   end
 end

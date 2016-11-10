@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   # GET /uploads
   def index
@@ -15,7 +16,7 @@ class UploadsController < ApplicationController
 
   # POST /uploads
   def create
-    @upload = Upload.new(upload_params)
+    @upload = Upload.new upload_params.merge(user: current_user)
 
     if @upload.save
       render json: @upload, status: :created, location: @upload
@@ -39,13 +40,13 @@ class UploadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_upload
-      @upload = Upload.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def upload_params
-      params.require(:upload).permit(:image, :user_id)
-    end
+  def set_upload
+    @upload = Upload.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def upload_params
+    params.require(:upload).permit(:image, :description, project_ids: [])
+  end
 end

@@ -9,4 +9,7 @@ class Upload < ApplicationRecord
   validates_presence_of :image
   validates_length_of :projects, minimum: 1
   validates_presence_of :user
+
+  accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :projects
 end
