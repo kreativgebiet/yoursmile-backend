@@ -1,3 +1,3 @@
 ActiveAdmin.register Upload do
-  # has_many :comments
+  permit_params :image, :description, :user_id project_ids: []
 end
