@@ -14,3 +14,7 @@
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]
 #   end
 # end
+
+Rails.application.config.middleware.use ActionDispatch::Flash
+Rails.application.config.middleware.use Rack::MethodOverride
+Rails.application.config.middleware.use ActionDispatch::Cookies

@@ -1,5 +1,5 @@
 # encoding: utf-8
-class ProjectsController < ApplicationController
+class ProjectsController < ApiController
   before_action :set_project, only: [:show, :update, :destroy]
 
   # GET /projects
