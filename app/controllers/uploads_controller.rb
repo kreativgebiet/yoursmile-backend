@@ -17,11 +17,7 @@ class UploadsController < ApiController
 
   # POST /uploads
   def create
-    image = upload_params[:image].force_encoding('UTF-8')
-
-    throw 'Encoding is invalid for image' unless image.valid_encoding?
-
-    @upload = Upload.new upload_params.merge(user: current_user, image: image)
+    @upload = Upload.new upload_params.merge(user: current_user)
 
     if @upload.save
       render json: @upload, status: :created, location: @upload
