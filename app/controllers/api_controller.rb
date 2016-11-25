@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApiController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
 

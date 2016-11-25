@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UploadsController < ApiController
   before_action :set_upload, only: [:show, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :update, :destroy]
