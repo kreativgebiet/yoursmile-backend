@@ -15,6 +15,7 @@ gem 'devise_token_auth'
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
+gem 'rack-utf8_sanitizer'
 gem 'rails_12factor', group: :production
 
 group :development, :test do
