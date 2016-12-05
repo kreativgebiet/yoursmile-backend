@@ -48,6 +48,6 @@ class ProjectsController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def project_params
-    params.require(:project).permit(:logo, :name)
+      params.require(:project).permit(:logo, :name, :description)
   end
 end
