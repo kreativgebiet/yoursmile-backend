@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
+  mount_uploader :avatar
+
   def to_s
-    name || nickname || email
+    email
   end
 end

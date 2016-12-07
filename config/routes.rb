@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'api#root'
 
-  resources :projects
+  resources :projects, only: [:index, :show]
   resources :uploads
 
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
