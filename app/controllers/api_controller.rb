@@ -3,7 +3,7 @@ class ApiController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
 
   def root
-    render text: 'Nothing to see here.'
+    render json: { status: 200, working: true }
   end
 
   protected
