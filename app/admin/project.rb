@@ -11,4 +11,19 @@ ActiveAdmin.register Project do
 
     actions
   end
+
+  form do |f|
+    f.inputs do
+      f.semantic_errors *f.object.errors.keys
+
+      f.input :logo
+      f.input :name
+      f.input :description
+      f.input :image
+      f.input :country_code
+      f.input :sector_code
+
+      f.actions
+    end
+  end
 end
