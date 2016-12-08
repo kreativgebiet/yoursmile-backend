@@ -28,6 +28,7 @@ class UploadsController < ApiController
 
   # PATCH/PUT /uploads/1
   def update
+    # TODO: Check if the user is authenticated to update record
     if @upload.update(upload_params)
       render json: @upload
     else
@@ -37,6 +38,7 @@ class UploadsController < ApiController
 
   # DELETE /uploads/1
   def destroy
+    # TODO: Check if the user is authenticated to update record
     @upload.destroy
   end
 

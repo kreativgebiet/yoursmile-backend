@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
+  has_many :comments
+
   mount_uploader :avatar
 
   def to_s

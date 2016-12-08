@@ -2,7 +2,8 @@
 class Upload < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :projects
-  has_many :comments, class_name: 'Upload::Comment'
+  has_many :upload_comments, class_name: 'Upload::Comment'
+  alias_attribute :comments, :upload_comments
 
   mount_uploader :image
 
@@ -12,4 +13,8 @@ class Upload < ApplicationRecord
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :projects
+
+  def to_s
+    "#{description} (#{id})"
+  end
 end

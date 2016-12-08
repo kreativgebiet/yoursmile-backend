@@ -9,8 +9,6 @@ class ApiController < ActionController::API
   protected
 
   def pagination
-    {
-      test: 'test'
-    }
+    { test: 'test' }
   end
 end
