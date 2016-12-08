@@ -15,6 +15,8 @@ ActiveAdmin.register Upload do
 
   form do |f|
     f.inputs do
+      f.semantic_errors *f.object.errors.keys
+
       f.input :image
       f.input :description
       f.input :user, collection: User.all.map { |user| [user, user.id] }

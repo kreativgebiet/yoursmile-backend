@@ -8,6 +8,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'bugsnag'
 gem 'carrierwave'
+gem 'fog-aws'
 gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
