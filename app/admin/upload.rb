@@ -1,12 +1,18 @@
 ActiveAdmin.register Upload do
   permit_params :image, :description, :user_id, project_ids: []
 
+  belongs_to :user, optional: true
+
   index do
     selectable_column
 
-    column :image
-    column :description
-    column :created_at
+    column(:image) do |upload|
+      image_tag upload.image.url, width: 180
+    end
+    column(:description)
+    column(:author)
+    column(:created_at)
+    column(:updated_at)
 
     actions do |upload|
       link_to 'Comments', admin_upload_upload_comments_path(upload)

@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
-  has_many :comments
+  has_many :uploads
+  has_many :comments, class_name: 'Upload::Comment'
 
+  validates_uniqueness_of :nickname
   validates_presence_of :nickname
 
   mount_uploader :avatar
@@ -16,7 +18,11 @@ class User < ActiveRecord::Base
     email
   end
 
-  def to_param
+  def parameterize
     nickname
   end
+
+  # def to_param
+  #   nickname
+  # end
 end

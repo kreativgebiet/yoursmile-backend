@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     if model.author.nil?
       "#{model.class.to_s.underscore}/_authorless/#{model.id}"
     else
-      "#{model.class.to_s.underscore}/#{model.author.to_param}/#{model.id}"
+      "#{model.class.to_s.underscore}/#{model.author.parameterize}/#{model.id}"
     end
   end
 

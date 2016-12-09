@@ -3,13 +3,15 @@ ActiveAdmin.register User do
 
   index do
     selectable_column
-    column :provider, as: :text
+    column :id
     column :uid, as: :text
     column :name
-
+    column :nickname
     column :email
 
-    actions
+    actions do |user|
+      link_to "Uploads (#{user.uploads.count})", admin_user_uploads_path(user)
+    end
   end
 
   form do |f|

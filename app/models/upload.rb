@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Upload < ApplicationRecord
   belongs_to :user
+  alias_attribute :author, :user
+
   has_and_belongs_to_many :projects
   has_many :upload_comments, class_name: 'Upload::Comment'
   alias_attribute :comments, :upload_comments
@@ -11,7 +13,7 @@ class Upload < ApplicationRecord
   validates_length_of :projects, minimum: 1
   validates_presence_of :user
 
-  validate :project_target_not_exceeded
+  # validate :project_target_not_exceeded
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :projects
@@ -20,7 +22,7 @@ class Upload < ApplicationRecord
     "#{description} (#{id})"
   end
 
-  def project_target_not_exceeded
-    errors.add(:project, 'target is can\'t be exceeded') unless project.target > project.uploads.count
-  end
+  # def project_target_not_exceeded
+  #   errors.add(:project, 'target is can\'t be exceeded') unless project.target > project.uploads.count
+  # end
 end
