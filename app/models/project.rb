@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   validates_presence_of :description
   validates_presence_of :logo
   validates_presence_of :image
+  validates_presence_of :target
 
   has_and_belongs_to_many :uploads
 

@@ -8,9 +8,15 @@ class User < ActiveRecord::Base
 
   has_many :comments
 
+  validates_presence_of :nickname
+
   mount_uploader :avatar
 
   def to_s
     email
+  end
+
+  def to_param
+    nickname
   end
 end
