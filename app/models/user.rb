@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :nickname
   validates_presence_of :nickname
 
-  mount_uploader :avatar
+  mount_uploader :avatar, AvatarUploader
 
   def to_s
     email

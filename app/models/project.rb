@@ -12,8 +12,8 @@ class Project < ApplicationRecord
 
   has_and_belongs_to_many :uploads
 
-  mount_uploader :logo
-  mount_uploader :image
+  mount_uploader :logo, LogoUploader
+  mount_uploader :image, ImageUploader
 
   validate :valid_country_code
 

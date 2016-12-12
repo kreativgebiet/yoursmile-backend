@@ -1,4 +1,4 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class LogoUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   storage :fog
