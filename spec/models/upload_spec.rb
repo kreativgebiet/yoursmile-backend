@@ -7,7 +7,7 @@ RSpec.describe Upload, type: :model do
 
   it { should have_and_belong_to_many :projects }
   it { should belong_to :user }
-  it { should have_many :comments }
+  it { should have_many :upload_comments }
 
   it { should accept_nested_attributes_for :user }
 end
