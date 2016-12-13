@@ -2,22 +2,21 @@
 class CommentsController < ApiController
   before_filter :authenticate_user!, except: [:index]
   before_action :set_upload
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_comment, only: [:update, :destroy]
 
   # GET /comments
   def index
     @comments = @upload.comments
-    # @comments = Upload::Comment.where(upload_id: @upload.id)
 
     render json: @comments, meta: { upload: UploadSerializer.new(@upload) }
   end
 
   # POST /comments
   def create
-    @comment = Upload::Comment.new(comment_params)
+    @comment = @upload.build_comment(comment_params.merge(author_id: current_user.id))
 
     if @comment.save
-      render json: @comment, status: :created, location: @comment
+      render json: @comment, status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -52,6 +51,6 @@ class CommentsController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def comment_params
-    params.require(:comment).permit(:logo, :name, :description)
+    params.require(:comment).permit(:text)
   end
 end
