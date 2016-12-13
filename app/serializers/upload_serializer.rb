@@ -1,6 +1,7 @@
 class UploadSerializer < ActiveModel::Serializer
-  attributes :id, :image, :author, :description, :created_at
+  attributes :id, :image, :author, :description, :comment_count, :created_at
 
+  has_many :projects
   belongs_to :user, key: :author
 
   def image
@@ -9,5 +10,9 @@ class UploadSerializer < ActiveModel::Serializer
 
   def author
     object.user.avatar.url
+  end
+
+  def comment_count
+    object.comments.count
   end
 end
