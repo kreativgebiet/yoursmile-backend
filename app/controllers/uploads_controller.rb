@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UploadsController < ApiController
-  before_action :set_upload, only: [:show, :update, :destroy]
+  before_action :set_upload, only: [:pay, :show, :update, :destroy]
   before_filter :authenticate_user!, only: [:pay, :create, :update, :destroy]
 
   # GET /uploads
@@ -16,13 +16,15 @@ class UploadsController < ApiController
   end
 
   def pay
-    Stripe::Charge.create(
-      :amount   => 100, # 1€ per transaction
-      :currency => 'eur',
-      :customer => current_user.stripe_customer_id
+    if
+    render json: Stripe::Charge.create(
+      amount: (@upload.count * 100) * 1.4 + 35, # 1€ per transaction
+      currency: 'eur',
+      description: "Bezahlung für Upload ##{params[:id]} by #{current_user.to_param}",
+      customer: current_user.stripe_customer_id
     )
   rescue Stripe::CardError => e
-     render json: { success: false, error: e }, status: :unprocessable_entity
+     render json: { success: false, error: e.message }, status: :unprocessable_entity
   end
 
   # POST /uploads
