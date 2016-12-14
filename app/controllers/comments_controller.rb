@@ -13,7 +13,7 @@ class CommentsController < ApiController
 
   # POST /comments
   def create
-    @comment = @upload.build_comment(comment_params.merge(author_id: current_user.id))
+    @comment = @upload.comments.build(comment_params.merge(author_id: current_user.id))
 
     if @comment.save
       render json: @comment, status: :created
