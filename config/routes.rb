@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :show]
   resources :uploads do
     resources :comments
+
+    member do
+      post :pay
+    end
   end
 
   resources :sources, only: [:index, :create]
