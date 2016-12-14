@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     email
   end
 
+  def regenerate_nickname
+    self.nickname = nickname.parameterize
+  end
+
   def create_stripe_customer_id
     if stripe_customer_id.nil? && !email.nil?
       description = "Customer for #{email}"
