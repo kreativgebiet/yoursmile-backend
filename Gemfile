@@ -6,6 +6,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem 'stripe', require: 'stripe'
 gem 'bugsnag'
 gem 'countries'
 gem 'fog-aws'
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'faker'
+  gem 'stripe-ruby-mock', '~> 2.3.1', require: 'stripe_mock'
 end
 
 group :development do

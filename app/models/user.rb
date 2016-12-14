@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :nickname
   validates_presence_of :nickname
+  validates_presence_of :stripe_customer_id
+
+  before_validation :create_stripe_customer_id
+  # before_save :ensure_nickname
 
   mount_uploader :avatar, AvatarUploader
 
@@ -18,11 +22,26 @@ class User < ActiveRecord::Base
     email
   end
 
+  def create_stripe_customer_id
+    if stripe_customer_id.nil? && !email.nil?
+      description = "Customer for #{email}"
+      customer = Stripe::Customer.create(
+        description: description,
+        email: email,
+        metadata: {
+          name: name,
+          nickname: nickname,
+        }
+      )
+      self.stripe_customer_id = customer.id
+    end
+  end
+
+  def stripe_instance
+    Stripe::Customer.retrieve(stripe_customer_id)
+  end
+
   def parameterize
     nickname
   end
-
-  # def to_param
-  #   nickname
-  # end
 end
