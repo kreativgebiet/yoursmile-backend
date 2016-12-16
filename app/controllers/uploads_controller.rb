@@ -16,7 +16,6 @@ class UploadsController < ApiController
   end
 
   def pay
-    if
     render json: Stripe::Charge.create(
       amount: (@upload.count * 100) * 1.4 + 35, # 1€ per transaction
       currency: 'eur',
