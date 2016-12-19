@@ -1,4 +1,4 @@
-class SourcesController < ApplicationController
+class SourcesController < ApiController
   before_filter :authenticate_user!
   before_filter :set_customer
 
