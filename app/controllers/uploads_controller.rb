@@ -5,7 +5,7 @@ class UploadsController < ApiController
 
   # GET /uploads
   def index
-    @uploads = Upload.includes(:projects, :user).all
+    @uploads = Upload.includes(:upload_comments, :projects, :user).all
 
     render json: @uploads
   end

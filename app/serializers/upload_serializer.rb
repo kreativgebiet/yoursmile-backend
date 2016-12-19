@@ -18,6 +18,6 @@ class UploadSerializer < ActiveModel::Serializer
   end
 
   def comment_count
-    object.comments.count
+    object.comments.length
   end
 end
