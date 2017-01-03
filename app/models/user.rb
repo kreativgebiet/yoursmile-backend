@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :uploads
+  has_many :reports, class_name: 'Upload::Report'
   has_many :comments, class_name: 'Upload::Comment'
 
   validates_uniqueness_of :nickname

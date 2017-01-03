@@ -23,6 +23,24 @@ RSpec.describe UploadsController, type: :controller do
     end
   end
 
+  describe 'POST #report' do
+    let(:upload) { create(:upload) }
+    before(:each) { auth_request(user) }
+
+    it 'returns 204' do
+      post :report, params: { id: upload.id }
+      expect(response).to have_http_status(204)
+    end
+
+    it 'creates a report' do
+      expect {
+        post :report, params: { id: upload.id }
+      }.to change {
+        upload.reports.count
+      }.by(1)
+    end
+  end
+
   describe 'POST #create' do
     before(:each) { auth_request(user) }
 

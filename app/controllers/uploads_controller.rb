@@ -15,6 +15,18 @@ class UploadsController < ApiController
     render json: @upload
   end
 
+  # POST /uploads/1/report
+  def report
+    @report = current_user.reports.build(upload_id: params[:id])
+
+    if @report.save
+      render status: :no_content
+    else
+      render json: @report.errors, status: :unprocessable_entity
+    end
+  end
+
+  # POST /uploads/1/pay
   def pay
     render json: Stripe::Charge.create(
       amount: ((@upload.projects.count * 100) * 1.4 + 35).round, # 1€ per transaction

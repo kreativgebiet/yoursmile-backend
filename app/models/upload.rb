@@ -4,6 +4,7 @@ class Upload < ApplicationRecord
   alias_attribute :author, :user
 
   has_and_belongs_to_many :projects
+  has_many :reports, class_name: 'Upload::Report'
   has_many :upload_comments, class_name: 'Upload::Comment'
   alias_attribute :comments, :upload_comments
 
