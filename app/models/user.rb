@@ -18,6 +18,18 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  def follow(user_id)
+    Followership.create follower_id: user_id, user_id: self.id
+  end
+
+  def following
+    Followership.where(follower_id: self.id)
+  end
+
+  def followers
+    Followership.where(user_id: self.id)
+  end
+
   def to_s
     email
   end
