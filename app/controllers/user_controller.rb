@@ -1,5 +1,5 @@
 class UserController < ApiController
-  before_filter :authenticate_user!, except: [:show, :uploads]
+  before_filter :authenticate_user!, except: [:show, :uploads, :followers, :following]
 
   def show
     @user = User.find params[:id]
@@ -28,6 +28,6 @@ class UserController < ApiController
 
   def following
     @following = current_user.following
-
+    render json: @following
   end
 end

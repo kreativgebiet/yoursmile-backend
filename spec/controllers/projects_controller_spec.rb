@@ -10,8 +10,6 @@ RSpec.describe ProjectsController, type: :controller do
     it 'assigns all uploads as @uploads' do
       project = create(:project)
 
-      p "Using #{project.country_code} for validation."
-
       get :index, params: {}
       expect(assigns(:projects)).to eq([project])
     end
