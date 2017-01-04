@@ -1,19 +1,17 @@
 class UserController < ApiController
+  before_action :find_user
   before_filter :authenticate_user!, except: [:show, :uploads, :followers, :following]
 
   def show
-    @user = User.find params[:id]
     render json: @user
   end
 
   def uploads
-    @uploads = User.find(params[:id]).uploads.includes(:user, :projects)
+    @uploads = @user.uploads.includes(:user, :projects)
     render json: @uploads, status: :ok
   end
 
   def follow
-    @user = User.find_by id: params[:id]
-
     if @user.nil?
       render status: :unprocessable_entity
     else
@@ -22,12 +20,18 @@ class UserController < ApiController
   end
 
   def followers
-    @followers = current_user.followers
+    @followers = @user.followers
     render json: @followers
   end
 
   def following
-    @following = current_user.following
+    @following = @user.following
     render json: @following
+  end
+
+  protected
+
+  def find_user
+    @user = User.find params[:id]
   end
 end
