@@ -23,11 +23,11 @@ class User < ActiveRecord::Base
     Followership.create follower_id: user_id, user_id: self.id
   end
 
-  def following
+  def followers
     Followership.where(follower_id: self.id)
   end
 
-  def followers
+  def following
     Followership.where(user_id: self.id)
   end
 

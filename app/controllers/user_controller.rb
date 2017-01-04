@@ -32,6 +32,6 @@ class UserController < ApiController
   protected
 
   def find_user
-    @user = User.find params[:id]
+    @user = User.find_by id: params[:id]
   end
 end

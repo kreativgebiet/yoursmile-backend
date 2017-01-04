@@ -47,24 +47,24 @@ RSpec.describe UserController, type: :controller do
 
   describe 'GET #followers' do
     it 'returns 200 status code' do
-      get :followers
+      get :followers, params: { id: user.to_param }
       expect(response).to have_http_status(200)
     end
 
     it 'assigns users followers' do
-      get :followers
+      get :followers, params: { id: user.to_param }
       expect(assigns(:followers)).to eq(user.followers)
     end
   end
 
   describe 'GET #following' do
     it 'returns 200 status code' do
-      get :following
+      get :following, params: { id: user.to_param }
       expect(response).to have_http_status(200)
     end
 
     it 'assigns users followings' do
-      get :following
+      get :following, params: { id: user.to_param }
       expect(assigns(:following)).to eq(user.following)
     end
   end
