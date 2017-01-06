@@ -13,6 +13,7 @@ gem 'fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'rmagick', '~> 2.13.1'
 gem 'omniauth'
+gem 'mailgun_rails'
 gem 'devise'
 gem 'devise_token_auth'
 
