@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get :uploads
       get :followers
       get :following
+      get :supported_projects
     end
   end
 

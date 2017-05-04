@@ -19,6 +19,11 @@ class UserController < ApiController
     end
   end
 
+  def supported_projects
+    @projects = @user.projects
+    render json: @projects
+  end
+
   def followers
     @followers = @user.followers
     render json: @followers

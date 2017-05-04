@@ -32,6 +32,20 @@ RSpec.describe UserController, type: :controller do
     end
   end
 
+  describe 'GET #supported_projects' do
+    it 'returns 200' do
+      get :supported_projects, params: { id: user.id }
+      expect(response).to have_http_status(200)
+    end
+
+    it 'assigns user to @user' do
+      @upload = create(:upload, user: user)
+
+      get :supported_projects, params: { id: user.id }
+      expect(assigns(:projects)).to match_array([@upload.projects.first])
+    end
+  end
+
   describe 'POST #follow' do
     it 'returns 204 if succeeded' do
       follower = create(:user)

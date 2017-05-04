@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :uploads
   has_many :reports, class_name: 'Upload::Report'
   has_many :comments, class_name: 'Upload::Comment'
+  has_many :projects, through: :uploads
 
   validates_uniqueness_of :nickname
   validates_presence_of :nickname
