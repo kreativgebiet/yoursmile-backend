@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :comments
 
     member do
+      post :like
       post :report
       post :pay
     end

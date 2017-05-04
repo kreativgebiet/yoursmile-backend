@@ -41,6 +41,24 @@ RSpec.describe UploadsController, type: :controller do
     end
   end
 
+  describe 'POST #like' do
+    let(:upload) { create(:upload) }
+    before(:each) { auth_request(user) }
+
+    it 'returns 204' do
+      post :like, params: { id: upload.id }
+      expect(response).to have_http_status(204)
+    end
+
+    it 'creates a like' do
+      expect {
+        post :like, params: { id: upload.id }
+      }.to change {
+        upload.likes.count
+      }.by(1)
+    end
+  end
+
   describe 'POST #create' do
     before(:each) { auth_request(user) }
 

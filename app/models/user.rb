@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :uploads
+  has_many :likes, class_name: 'Upload::Like'
   has_many :reports, class_name: 'Upload::Report'
   has_many :comments, class_name: 'Upload::Comment'
   has_many :projects, through: :uploads
@@ -30,6 +31,11 @@ class User < ActiveRecord::Base
 
   def following
     Followership.where(user_id: self.id)
+  end
+
+  def like(upload)
+    new_like = likes.build(upload: upload)
+    new_like.save
   end
 
   def to_s

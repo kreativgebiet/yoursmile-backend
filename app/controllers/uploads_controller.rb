@@ -1,7 +1,7 @@
 # encoding: utf-8
 class UploadsController < ApiController
-  before_action :set_upload, only: [:pay, :show, :update, :destroy]
-  before_filter :authenticate_user!, only: [:pay, :create, :update, :destroy]
+  before_action :set_upload, only: [:like, :pay, :show, :update, :destroy]
+  before_filter :authenticate_user!, only: [:like, :pay, :create, :update, :destroy]
 
   # GET /uploads
   def index
@@ -23,6 +23,17 @@ class UploadsController < ApiController
       render status: :no_content
     else
       render json: @report.errors, status: :unprocessable_entity
+    end
+  end
+
+  # POST /uploads/1/like
+  def like
+    @like = current_user.like(@upload)
+
+    if @like
+      render status: :no_content
+    else
+      render json: @like.errors, status: :unprocessable_entity
     end
   end
 
