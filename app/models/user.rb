@@ -34,8 +34,20 @@ class User < ActiveRecord::Base
   end
 
   def like(upload)
-    new_like = likes.build(upload: upload)
-    new_like.save
+    if likes?(upload)
+      like_for(upload).destroy
+    else
+      new_like = likes.build(upload: upload)
+      new_like.save
+    end
+  end
+
+  def likes?(upload)
+    !!like_for(upload)
+  end
+
+  def like_for(upload)
+    self.likes.find_by(upload: upload)
   end
 
   def to_s

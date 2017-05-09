@@ -15,6 +15,13 @@ RSpec.describe User, type: :model do
       upload = create(:upload, user: @user)
       expect { @user.like(upload) }.to change { @user.likes.count }.by(1)
     end
+
+    it 'dislikes upload on duplicate call' do
+      upload = create(:upload)
+
+      expect { @user.like(upload) }.to change { @user.likes.count }.by(1)
+      expect { @user.like(upload) }.to change { @user.likes.count }.by(-1)
+    end
   end
 
   describe '#projects' do
