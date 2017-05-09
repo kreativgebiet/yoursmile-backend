@@ -1,5 +1,5 @@
 class UploadSerializer < ActiveModel::Serializer
-  attributes :id, :image, :description, :comment_count, :likes_count, :created_at, :author, :projects
+  attributes :id, :image, :description, :comment_count, :likes_count, :user_liked, :created_at, :author, :projects
 
   belongs_to :user, key: :author
 
