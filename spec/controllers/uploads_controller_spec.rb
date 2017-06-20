@@ -62,6 +62,27 @@ RSpec.describe UploadsController, type: :controller do
   describe 'POST #create' do
     before(:each) { auth_request(user) }
 
+    context 'with multiple project ids' do
+      it 'returns 200' do
+        post :create, params: { upload: valid_attributes }
+        expect(response).to have_http_status(201)
+      end
+
+      it 'creates a new Upload' do
+        expect {
+          post :create, params: { upload: valid_attributes }
+        }.to change(Upload, :count).by(1)
+      end
+
+      it 'the upload has 2 supported projects' do
+        post :create, params: { upload: valid_attributes }
+
+        upload = assigns(:upload)
+
+        expect(upload.projects.count).to eq(projects.count)
+      end
+    end
+
     context 'with valid params' do
       it 'creates a new Upload' do
         expect {
