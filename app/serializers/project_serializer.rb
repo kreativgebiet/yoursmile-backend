@@ -1,5 +1,5 @@
 class ProjectSerializer < ActiveModel::Serializer
-  cache key: 'project', expires_in: 24.hours
+  cache key: 'project', expires_in: 7.days
 
   attributes :id, :name, :description, :image, :logo, :created_at, :target, :progress, :country_code, :sector_code
 
