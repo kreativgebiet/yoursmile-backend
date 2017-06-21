@@ -14,6 +14,6 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def supported_projects
-    projects
+    object.projects
   end
 end

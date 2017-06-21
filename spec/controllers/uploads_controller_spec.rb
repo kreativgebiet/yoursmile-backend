@@ -4,7 +4,8 @@ RSpec.describe UploadsController, type: :controller do
   let(:user) { create(:user) }
   let(:projects) { create_list(:project, 3) }
   let(:attributes) { attributes_for(:upload) }
-  let(:valid_attributes) { attributes.merge(project_ids: projects.pluck(:id)) }
+  let(:supported_projects) { Hash[projects.map { |project| [project.id, 1000] }] }
+  let(:valid_attributes) { { upload: attributes, supported_projects: supported_projects } }
   let(:invalid_attributes) { attributes.merge(image: nil) }
 
   describe 'GET #index' do
@@ -64,19 +65,18 @@ RSpec.describe UploadsController, type: :controller do
 
     context 'with multiple project ids' do
       it 'returns 200' do
-        post :create, params: { upload: valid_attributes }
+        post :create, params: valid_attributes
         expect(response).to have_http_status(201)
       end
 
       it 'creates a new Upload' do
         expect {
-          post :create, params: { upload: valid_attributes }
+          post :create, params: valid_attributes
         }.to change(Upload, :count).by(1)
       end
 
       it 'the upload has 2 supported projects' do
-        post :create, params: { upload: valid_attributes }
-
+        post :create, params: valid_attributes
         upload = assigns(:upload)
 
         expect(upload.projects.count).to eq(projects.count)
@@ -86,12 +86,12 @@ RSpec.describe UploadsController, type: :controller do
     context 'with valid params' do
       it 'creates a new Upload' do
         expect {
-          post :create, params: { upload: valid_attributes }
+          post :create, params: valid_attributes
         }.to change(Upload, :count).by(1)
       end
 
       it 'assigns a newly created upload as @upload' do
-        post :create, params: { upload: valid_attributes }
+        post :create, params: valid_attributes
 
         expect(assigns(:upload)).to be_a(Upload)
         expect(assigns(:upload)).to be_persisted

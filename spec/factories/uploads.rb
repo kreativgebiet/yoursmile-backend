@@ -8,6 +8,6 @@ FactoryGirl.define do
     description Faker::Lorem.paragraph
 
     user { create(:user) }
-    projects { [create(:project)] }
+    supports { [create(:upload_support)] }
   end
 end

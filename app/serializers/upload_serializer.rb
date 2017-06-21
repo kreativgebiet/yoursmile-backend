@@ -1,13 +1,13 @@
 class UploadSerializer < ActiveModel::Serializer
-  attributes :id, :image, :description, :comment_count, :likes_count, :user_liked, :created_at, :author, :projects
+  attributes :id, :image, :description, :comment_count, :likes_count, :user_liked, :created_at, :author
 
   belongs_to :user, key: :author
 
-  def projects
-    object.projects.map do |project|
-      SimpleProjectSerializer.new(project)
-    end
-  end
+  # def projects
+  #   object.projects.map do |project|
+  #     SimpleProjectSerializer.new(project)
+  #   end
+  # end
 
   def image
     object.image.url

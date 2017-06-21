@@ -10,7 +10,8 @@ class Project < ApplicationRecord
   validates_presence_of :sector_code
   validates_presence_of :country_code
 
-  has_and_belongs_to_many :uploads
+  has_many :supports, class_name: 'Upload::Support'
+  has_many :projects, through: :supports
 
   mount_uploader :logo, LogoUploader
   mount_uploader :image, ImageUploader

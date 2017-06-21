@@ -40,7 +40,7 @@ class UploadsController < ApiController
   # POST /uploads/1/pay
   def pay
     render json: Stripe::Charge.create(
-      amount: ((@upload.projects.count * 100) * 1.4 + 35).round, # 1€ per transaction
+      amount: (@upload.amount_to_charge * 1.4 + 35).round, # 1€ per transaction
       currency: 'eur',
       description: "Bezahlung für Upload ##{params[:id]} by #{current_user.to_param}",
       customer: current_user.stripe_customer_id
@@ -51,7 +51,11 @@ class UploadsController < ApiController
 
   # POST /uploads
   def create
-    @upload = Upload.new upload_params.merge(user: current_user)
+    @upload = UploadService.new({
+      :upload => upload_params,
+      :supported_projects => params[:supported_projects],
+      :user => current_user
+    }).run
 
     if @upload.save
       render json: @upload, status: :created, location: @upload
@@ -84,6 +88,6 @@ class UploadsController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def upload_params
-    params.require(:upload).permit(:image, :description, project_ids: [])
+    params.require(:upload).permit(:image, :description)
   end
 end
