@@ -11,6 +11,7 @@ class Project < ApplicationRecord
   validates_presence_of :country_code
 
   has_many :supports, class_name: 'Upload::Support'
+  has_many :uploads, through: :supports
   has_many :projects, through: :supports
 
   mount_uploader :logo, LogoUploader
