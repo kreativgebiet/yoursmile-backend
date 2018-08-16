@@ -12,7 +12,7 @@ class Upload < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  validates_presence_of :image
+  # validates_presence_of :image
   # validates_length_of :projects, minimum: 1
   validates_presence_of :user
 
