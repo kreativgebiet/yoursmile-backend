@@ -23,6 +23,7 @@ module YourSmile
     # -- all .rb files in that directory are automatically loaded.
 
     # config.middleware.insert 0, Rack::UTF8Sanitizer
+    config.assets.compile = false
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
