@@ -40,7 +40,7 @@ class UploadsController < ApiController
   # POST /uploads/1/pay
   def pay
     render json: Stripe::Charge.create(
-      amount: (@upload.amount_to_charge * 1.4 + 35).round, # 1€ per transaction
+      amount: (@upload.amount_to_charge).round, # 1€ per transaction
       currency: 'eur',
       description: "Bezahlung für Upload ##{params[:id]} by #{current_user.to_param}",
       customer: current_user.stripe_customer_id
