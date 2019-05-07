@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
-  storage :fog
+  # storage :fog
 
   def store_dir
     if model.respond_to?(:author)

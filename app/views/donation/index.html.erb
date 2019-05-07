@@ -1,0 +1,16 @@
+<h1>Amount</h1>
+
+<%= form_tag("/donation", method: "post") do %>
+  <div>
+    <%= label_tag(:amount, "Summe:") %>
+    <%= number_field_tag(:amount, '10') %>
+    <%= label_tag(:amount, "€") %>
+  </div>
+  <div>
+    <%= radio_button(:donation, :gateway, "paypal")  %>
+    <%= label_tag(:gateway, "Paypal") %>
+    <%= radio_button(:donation, :gateway, "stripe") %>
+    <%= label_tag(:gateway, "Stripe") %>
+  </div>
+  <%= submit_tag("Spenden") %>
+<% end %>

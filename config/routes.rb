@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :donation, only: [:index, :create] do
+
+  end
+
   resources :sources, only: [:index, :create]
 
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
