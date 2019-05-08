@@ -1,0 +1,14 @@
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+  var handler = StripeCheckout.configure({
+    key: '<%= Stripe.api_key %>',
+    locale: 'auto',
+    name: 'Spende für das Projekt "<%= @project.name %>"',
+    description: 'Einmalige Spende',
+    token: function(token) {
+      $('input#stripeToken').val(token.id);
+      $('form').submit();
+    }
+  });
+</script>

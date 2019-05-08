@@ -7,6 +7,7 @@ gem 'puma', '~> 3.0'
 gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'stripe', require: 'stripe'
+gem 'paypal-sdk-rest'
 gem 'bugsnag'
 gem 'countries'
 gem 'fog-aws'

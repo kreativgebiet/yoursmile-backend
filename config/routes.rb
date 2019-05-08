@@ -5,7 +5,14 @@ Rails.application.routes.draw do
 
   root to: 'api#root'
 
-  resources :projects, only: [:index, :show]
+  resources :projects, only: [:index, :show] do
+    resources :donations, only: [:new, :create] do
+      collection do
+        get :stripe
+      end
+    end
+  end
+
   resources :uploads do
     resources :comments
 
@@ -14,10 +21,6 @@ Rails.application.routes.draw do
       post :report
       post :pay
     end
-  end
-
-  resources :donation, only: [:index, :create] do
-
   end
 
   resources :sources, only: [:index, :create]
@@ -32,6 +35,11 @@ Rails.application.routes.draw do
       get :followers
       get :following
       get :supported_projects
+    end
+    if Rails.env.development?
+      collection do
+        get :dev_sign_in
+      end
     end
   end
 
