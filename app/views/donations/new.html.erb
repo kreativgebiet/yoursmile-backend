@@ -1,20 +1,4 @@
-<h1>Amount</h1>
+Donate <%= @donation.amount %> EUR
 
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-
-<%= form_for([:project, @donation]) do |f| %>
-  <div>
-    <%= label(:amount, "Summe:") %>
-    <%= f.number_field(:amount) %>
-    <%= label(:amount, "€") %>
-  </div>
-  <div>
-    <%= f.radio_button(:gateway, "paypal", checked: true)  %>
-    <%= label(:gateway, "Paypal") %>
-    <%= f.radio_button(:gateway, "stripe") %>
-    <%= label(:gateway, "Stripe") %>
-  </div>
-  <%= submit_tag("Spenden") %>
-<% end %>
+<%= link_to 'Continue with PayPal', action: 'paypal' %>
+<%= link_to 'Continue with Stripe', action: 'stripe' %>

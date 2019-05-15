@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :show] do
     resources :donations, only: [:new, :create] do
       collection do
+        get :paypal
         get :stripe
+        post :stripe_charge
       end
     end
   end
