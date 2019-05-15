@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get :paypal
         get :stripe
         post :stripe_charge
+        get :paypal_callback
       end
     end
   end
