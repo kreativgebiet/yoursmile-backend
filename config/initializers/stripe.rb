@@ -4,6 +4,3 @@ Stripe.api_key = ENV.fetch('STRIPE_SECRET_KEY', 'sk_test_4FXM6s6OOILNa8KPdxyXDRt
 STRIPE_CONFIG = {
     public_key: ENV.fetch('STRIPE_PUBLIC_KEY', 'pk_test_cX8rDspcsLdUPz5yKSDZ5QRm')
 }
-
-puts Stripe.api_key
-puts STRIPE_CONFIG[:public_key]
