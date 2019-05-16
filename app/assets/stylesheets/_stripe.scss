@@ -328,6 +328,31 @@
       }
     }
   }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2px;
+
+    .field {
+      flex: 1;
+      border: 1px solid #ACACAC;
+      margin-right: 2px;
+      &:last-child {
+        margin-right: 0;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        color: black;
+
+        &::placeholder {
+          color: #D1DAE1;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 670px) {

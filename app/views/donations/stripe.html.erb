@@ -20,8 +20,36 @@
         </div>
         <fieldset>
           <h1 class="headline" data-tid="elements_examples.form.pay_with_card">Spende <%= @amount %> EUR per Kreditkarte</h1>
+
           <div class="container">
-            <div id="stripe-card"></div>
+            <div class="row">
+              <div class="field">
+                <input id="stripe-name" data-tid="elements_examples.form.name_placeholder" class="input" type="text" placeholder="Name" required autocomplete="name">
+              </div>
+            </div>
+            <div data-locale-reversible="">
+              <div class="row">
+                <div class="field">
+                  <input id="stripe-address" data-tid="elements_examples.form.address_placeholder" class="input" type="text" placeholder="Address" required autocomplete="address-line1">
+                </div>
+              </div>
+              <div class="row" data-locale-reversible="">
+                <div class="field">
+                  <input id="stripe-city" data-tid="elements_examples.form.city_placeholder" class="input" type="text" placeholder="City" required autocomplete="address-level2">
+                </div>
+                <div class="field">
+                  <input id="stripe-state" data-tid="elements_examples.form.state_placeholder" class="input empty" type="text" placeholder="State" required autocomplete="address-level1">
+                </div>
+                <div class="field">
+                  <input id="stripe-zip" data-tid="elements_examples.form.postal_code_placeholder" class="input empty" type="text" placeholder="ZIP" required autocomplete="postal-code">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <div id="stripe-card"></div>
+              </div>
+            </div>
             <button type="submit" data-tid="elements_examples.form.donate_button" class="button">Spenden</button>
           </div>
         </fieldset>

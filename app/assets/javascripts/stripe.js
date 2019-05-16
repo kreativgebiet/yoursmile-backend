@@ -15,7 +15,7 @@ window.onload = function() {
           "input[type='text'], input[type='email'], input[type='tel']"
         ),
         function(input) {
-          input.removeAttribute('disabled');
+          input.removeAttribute('disabled');``
         }
       );
     }
@@ -100,7 +100,16 @@ window.onload = function() {
       // Use Stripe.js to create a token. We only need to pass in one Element
       // from the Element group in order to create a token. We can also pass
       // in the additional customer data we collected in our form.
-      stripe.createToken(elements[0]).then(function(result) {
+
+      var options = {
+        name: document.getElementById('stripe-name').value,
+        address_line1: document.getElementById('stripe-address').value,
+        address_city: document.getElementById('stripe-city').value,
+        address_state: document.getElementById('stripe-state').value,
+        address_zip: document.getElementById('stripe-zip').value
+      };
+
+      stripe.createToken(elements[0], options).then(function(result) {
         fetch('/projects/' + window.projectId + '/donations/stripe_charge', {
           method: 'POST',
           body: JSON.stringify({ token: result.token.id }),
@@ -154,6 +163,7 @@ window.onload = function() {
    * Card Element
    */
   var card = elements.create("card", {
+    hidePostalCode: true,
     style: {
       base: {
         color: "#32325D",
