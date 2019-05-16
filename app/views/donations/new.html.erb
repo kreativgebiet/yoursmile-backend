@@ -1,0 +1,12 @@
+<% content_for :styles do %>
+
+<% end %>
+
+<% content_for :javascripts do %>
+  Wut
+<% end %>
+
+<h1 class="headline">Spende <%= @donation.amount %> EUR</h1>
+
+<%= link_to 'Weiter mit PayPal', { action: 'paypal' }, { class: 'button' } %>
+<%= link_to 'Weiter mit Stripe', { action: 'stripe' }, { class: 'button' } %>

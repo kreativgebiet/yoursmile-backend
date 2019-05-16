@@ -1,6 +1,6 @@
 class UserController < ApiController
   before_action :find_user
-  before_filter :authenticate_user!, except: [:show, :uploads, :followers, :following]
+  before_filter :authenticate_user!, except: [:show, :uploads, :followers, :following, :dev_sign_in]
 
   def show
     render json: @user
@@ -32,6 +32,11 @@ class UserController < ApiController
   def following
     @following = @user.following
     render json: @following
+  end
+
+  def dev_sign_in
+    sign_in User.first
+    render text: 'OK'
   end
 
   protected
