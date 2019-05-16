@@ -10,8 +10,8 @@ test: &default
   # Credentials for Classic APIs
   username: jb-us-seller_api1.paypal.com
   app_id: <%= ENV.fetch('PAYPAL_APP_ID', 'info_api1.smileandchange.com') %>
-  password: <%= ENV.fetch('STRIPE_PASSWORD') %>
-  signature: <%= ENV.fetch('STRIPE_SIGNATURE') %>
+  password: <%= ENV.fetch('PAYPAL_PASSWORD') %>
+  signature: <%= ENV.fetch('PAYPAL_SIGNATURE') %>
   # # With Certificate
   # cert_path: "config/cert_key.pem"
   sandbox_email_address: Platform.sdk.seller@gmail.com
