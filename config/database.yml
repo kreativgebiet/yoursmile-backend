@@ -78,6 +78,13 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+staging:
+  <<: *default
+  database: YourSmile_production
+  username: YourSmile
+  password: <%= ENV['YOURSMILE_DATABASE_PASSWORD'] %>
+
 production:
   <<: *default
   database: YourSmile_production
