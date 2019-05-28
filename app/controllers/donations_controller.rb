@@ -35,6 +35,11 @@ class DonationsController < ApplicationController
   end
 
   def paypal_callback
+    @amount = session[:donation_amount].to_i
+    unless @amount
+      raise ActionController::BadRequest.new(), 'No donation amount'
+    end
+      
     payment_id = params.fetch(:paymentId, nil)
     if payment_id.present?
       @payment = execute_paypal_payment({

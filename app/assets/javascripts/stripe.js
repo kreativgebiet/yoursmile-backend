@@ -119,7 +119,7 @@ window.onload = function() {
             example.classList.remove('submitting');
             if (response.ok) {
               example.classList.add('submitted');
-              location.href = 'App://diddonate'
+              location.href = window.callbackUrl
             } else {
               alert('Could not charge card. Please contact an administrator.')
             }

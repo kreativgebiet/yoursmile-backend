@@ -2,6 +2,7 @@
   <script>
     window.stripeApiKey = '<%= STRIPE_CONFIG[:public_key] %>';
     window.projectId = <%= @project.id %>;
+    window.callbackUrl = 'yoursmile://diddonate?amount=<%= @amount %>&project_id=<%= @project.id %>';
   </script>
 
   <%= javascript_include_tag 'stripe' %>
